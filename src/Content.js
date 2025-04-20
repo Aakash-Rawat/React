@@ -58,60 +58,24 @@
 
 //+++++++++++ Lists & Keys +++++++++++++++++++++
 
-import {useState} from 'react';
-import { FaTrashAlt } from 'react-icons/fa'
 
-const Content = ()=>{
-  const [items, setItems] = useState([
-    {
-      id:1,
-      checked: true,
-      name: "Item1"
-    },
-    {
-      id:2,
-      checked: false,
-      name: "Item1"
-    },
-    {
-      id:3,
-      checked: false,
-      name: "Item1"
-    }
-   
-  ]);
+import ItemList from './ItemList'
 
-  const handleCheck = (id)=>{
-        const listItems = items.map((item)=>
-          item.id===id? {...item,checked: !item.checked} : item);
-        setItems(listItems);
-        localStorage.setItem('shoppingList',JSON.stringify(listItems))
-         
-  }
-
-
-
-
+const Content = ({ items, handleCheck,handleDelete})=>{
+  
   return(
     <main>
-      <ul>
-        {items.map((item)=>(
-          <li className="item" key={item.id}>
-             <input
-               type = "checkbox"
-               onChange={()=>handleCheck(item.id)}
-               checked = {item.checked}
-             />
-             <label>{item.name}</label>
-             <FaTrashAlt 
-             role="button"
-              tabIndex="0" 
-              />
-          </li>
-        ))}
-      </ul>
+      {items.length ? (
+              <ItemList
+                    items = {items}
+                    handleCheck={handleCheck}
+                    handleDelete={handleDelete} 
+                    />
+            ) : (
+        <p style={{ marginTop: '2rem' }}>Your list is empty</p>
+      )}
     </main>
-  )
+  ) 
 }
 
 export default Content
