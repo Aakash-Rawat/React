@@ -10,8 +10,8 @@ const LineItem = ({item,handleCheck,handleDelete})=>{
         <label 
         style={(item.checked)?{textDecoration:'line-through'}:null}
         onDoubleClick={()=>handleCheck(item.id)}
-
-        >{item.name}</label>
+        >
+        {item.item}</label>
         <FaTrashAlt 
         onClick={()=>{
          handleDelete(item.id)
